@@ -2,7 +2,7 @@ package duplicate;
 
 
 import java.io.File;
-import java.util.Objects;
+import java.util.*;
 
 public class ObjectFile {
     private String name;
@@ -19,6 +19,29 @@ public class ObjectFile {
         this.sizeInBytes = sizeInBytes;
     }
 
+    public ObjectFile(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
+
+    public ObjectFile() {
+
+    }
+
+    public ObjectFile(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "ObjectFile{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", path='" + path + '\'' +
+                ", lastModification=" + lastModification +
+                ", sizeInBytes=" + sizeInBytes +
+                '}';
+    }
 
     public String getName() {
         return name;
@@ -95,7 +118,6 @@ public class ObjectFile {
         //double [] re = new double[n];
     }
 
-
     public boolean equalsName(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -110,14 +132,12 @@ public class ObjectFile {
         return lastModification == that.lastModification;
     }
 
-
     public boolean equalsSize(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ObjectFile that = (ObjectFile) o;
         return sizeInBytes == that.sizeInBytes;
     }
-
 
     public boolean equalsPath(Object o) {
         if (this == o) return true;
@@ -133,4 +153,42 @@ public class ObjectFile {
         return Objects.equals(type, that.type);
     }
 
+    public List<ObjectFile> getScenarioOne(List<ObjectFile> allFiles, ObjectFile objectFile) {
+        List<ObjectFile> result = new ArrayList<>();
+        for (ObjectFile o : allFiles) {
+            if (o.getName() == objectFile.getName()) {
+                result.add(o);
+            }
+        }
+// TODO drop all result  =1
+        if (result.size() == 1) return new ArrayList<ObjectFile>();
+
+        return result;
+    }
+
+    public Map<String, List<ObjectFile>> doMapScenarioOne(List<ObjectFile> allFiles) {
+        Map<String, List<ObjectFile>> maps = new HashMap<>();
+        final List<ObjectFile> helper = allFiles;
+        helper.forEach(o -> {
+                    List<ObjectFile> list = getScenarioOne(helper,o);
+                    if (list.size() > 1) {
+                        String name = list.get(0).getName();
+                        maps.put(name, list);
+                    }
+                }
+        );
+        return maps;
+
+    }
+
+    public List<ObjectFile> getScenarioTwo(List<ObjectFile> allFile) {
+        List<ObjectFile> result = new ArrayList<>();
+        for (ObjectFile o : allFile) {
+            if (o.getType() == this.getType()) {
+                result.add(o);
+            }
+        }
+
+        return result;
+    }
 }

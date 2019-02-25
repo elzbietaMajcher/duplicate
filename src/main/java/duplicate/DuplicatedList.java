@@ -7,9 +7,6 @@ public class DuplicatedList {
 
     private List<ObjectFile> objectFileList;
 
-    public DuplicatedList(List<ObjectFile> objectFileList) {
-        this.objectFileList = objectFileList;
-    }
 
     public List<ObjectFile> getObjectFileList() {
         return objectFileList;

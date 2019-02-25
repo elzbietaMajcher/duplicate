@@ -29,8 +29,8 @@ public class DuplicatedListTest {
         obj1 = new ObjectFile("n", "t", "p1", 1, 1);
         obj2 = new ObjectFile("n2", "t2", "p2", 2, 4);
         obj3 = new ObjectFile("n3", "t3", "p3", 3, 4);
-        obj4 = new ObjectFile("n", "t3", "p3", 4, 4);
-        obj5 = new ObjectFile("n", "t", "p1", 5, 5);
+        obj4 = new ObjectFile("n", "t3", "p4", 4, 4);
+        obj5 = new ObjectFile("n", "t", "p5", 5, 5);
 
         fullList.add(obj1);
         fullList.add(obj2);
@@ -50,7 +50,7 @@ public class DuplicatedListTest {
         ObjectFile obj6 = new ObjectFile("n6", "t3", "p6", 2111166, 6000);
         fullList.add(obj6);
         List<ObjectFile> testedList = fullList;
-        List<ObjectFile> duplicatesList = DuplicatedList.createDuplicatedList(testedList, 0, "type");
+        List<ObjectFile> duplicatesList = DuplicatedList.createDuplicatedList(testedList, 2, "type");
         assertEquals(3, duplicatesList.size());
     }
 
@@ -64,7 +64,7 @@ public class DuplicatedListTest {
 
     @Test
     public void listHas3ObjectFilesWithTheSameSize() {
-        List<ObjectFile> duplicatesList = DuplicatedList.createDuplicatedList(fullList, 0, "sizeInBytes");
+        List<ObjectFile> duplicatesList = DuplicatedList.createDuplicatedList(fullList, 1, "sizeInBytes");
         assertEquals(3, duplicatesList.size());
     }
 
