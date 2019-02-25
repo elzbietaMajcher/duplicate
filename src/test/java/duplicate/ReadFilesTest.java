@@ -1,14 +1,12 @@
 package duplicate;
 
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,9 +22,11 @@ public class ReadFilesTest {
     private String pathDirectoryOneFile = "src\\test\\resources\\folder_testowy\\Nowy folder";
 
 
+    DuplicatesMap scenarioOne = new DuplicatesMap();
     ObjectFile objectFile = new ObjectFile();
     DataFactory dataFactory = new DataFactory();
     List<ObjectFile> allList = dataFactory.createObjects1();
+    List<ObjectFile> allList2 = dataFactory.createObjects2();
 
 
     @Test
@@ -36,45 +36,44 @@ public class ReadFilesTest {
         assertEquals(name, ObjectFile.extractName(fullName));
     }
 
-//    @Test
-//    public void testAllVsScenarioOne() {
-//
-//        List<ObjectFile> result = new ArrayList<ObjectFile>();
-//        for (ObjectFile o : allList) {
-//            List<ObjectFile> resultO = o.getScenarioOne(allList);
-//            System.out.println(o.getName());
-//            System.out.println(resultO);
-//
-//            result.addAll(resultO);
-//
-//        }
-//        assertEquals(3, result.size());
-//    }
-
-   @Test
-   public void testAllScenarioOne(){
-       Map<String, List<ObjectFile>> maps = objectFile.doMapScenarioOne(allList);
-       assertEquals(1,maps.size());
-   }
-
-
     @Test
-    public void testSingleScenarioOne() {
-
-        ObjectFile objectFile = new ObjectFile("n");
-        List<ObjectFile> result = objectFile.getScenarioOne(allList, objectFile);
-        //System.out.println(objectFile);
-        System.out.println(result);
-        assertEquals(3, result.size());
+    public void testDoMapScenarioEmptyArray() {
+        List<ObjectFile> empty = new ArrayList<>();
+        Map<String, List<ObjectFile>> maps = scenarioOne.doMap(empty, "name");
+        assertEquals(0, maps.size());
     }
 
     @Test
-    public void testScenarioTwo() {
+    public void testDoMapScenarioOneElement() {
+        List<ObjectFile> one = new ArrayList<>();
+        ObjectFile ob = new ObjectFile("n", "t", "p1", 1, 1);
+        one.add(ob);
+        Map<String, List<ObjectFile>> maps = scenarioOne.doMap(one, "name");
+        assertEquals(0, maps.size());
+    }
 
+    @Test
+    public void testDoMapScenarioOneTheSameName() {
+        Map<String, List<ObjectFile>> maps = scenarioOne.doMap(allList, "name");
+        assertEquals(1, maps.size());
+    }
+
+    @Test
+    public void testDoMapScenarioTheSameName() {
+        Map<String, List<ObjectFile>> maps = scenarioOne.doMap(allList2, "name");
+        assertEquals(2, maps.size());
+    }
+
+    @Test
+    public void testDoMapScenarioTheSameExtension() {
+        Map<String, List<ObjectFile>> maps = scenarioOne.doMap(allList2, "type");
+        assertEquals(3, maps.size());
+    }
+
+    @Test
+    public void testDoDuplicateListTheSameExtension() {
         ObjectFile objectFile = new ObjectFile("t", "t3");
-        List<ObjectFile> result = objectFile.getScenarioTwo(allList);
-        System.out.println(objectFile);
-        System.out.println(result);
+        List<ObjectFile> result = scenarioOne.doDuplicateList(allList, objectFile, "type");
         assertEquals(2, result.size());
     }
 

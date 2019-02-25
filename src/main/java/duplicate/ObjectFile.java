@@ -153,42 +153,4 @@ public class ObjectFile {
         return Objects.equals(type, that.type);
     }
 
-    public List<ObjectFile> getScenarioOne(List<ObjectFile> allFiles, ObjectFile objectFile) {
-        List<ObjectFile> result = new ArrayList<>();
-        for (ObjectFile o : allFiles) {
-            if (o.getName() == objectFile.getName()) {
-                result.add(o);
-            }
-        }
-// TODO drop all result  =1
-        if (result.size() == 1) return new ArrayList<ObjectFile>();
-
-        return result;
-    }
-
-    public Map<String, List<ObjectFile>> doMapScenarioOne(List<ObjectFile> allFiles) {
-        Map<String, List<ObjectFile>> maps = new HashMap<>();
-        final List<ObjectFile> helper = allFiles;
-        helper.forEach(o -> {
-                    List<ObjectFile> list = getScenarioOne(helper,o);
-                    if (list.size() > 1) {
-                        String name = list.get(0).getName();
-                        maps.put(name, list);
-                    }
-                }
-        );
-        return maps;
-
-    }
-
-    public List<ObjectFile> getScenarioTwo(List<ObjectFile> allFile) {
-        List<ObjectFile> result = new ArrayList<>();
-        for (ObjectFile o : allFile) {
-            if (o.getType() == this.getType()) {
-                result.add(o);
-            }
-        }
-
-        return result;
-    }
 }

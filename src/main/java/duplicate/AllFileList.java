@@ -12,27 +12,10 @@ public class AllFileList {
 
     private List<ObjectFile> allFilesList;
 
-    public AllFileList() {
-    }
 
     public List<ObjectFile> getAllFilesList() {
         return allFilesList;
     }
-
-    public void setAllFilesList(List<ObjectFile> allFilesList) {
-        this.allFilesList = allFilesList;
-    }
-    //    public static void main(String[] args) throws IOException {
-//        String pathDirectory = "C:\\mój komputer\\folder_testowy";
-//
-//        File folder = new File(pathDirectory);
-//
-//
-//        System.out.println("----------------------------");
-//        ArrayList<File> array = new ArrayList<File>();
-//        System.out.println(listFilesForFolder(folder, array).size());
-//    }
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
