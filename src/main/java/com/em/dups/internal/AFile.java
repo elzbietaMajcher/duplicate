@@ -1,17 +1,21 @@
-package duplicate;
+package com.em.dups.internal;
 
 
 import java.io.File;
 import java.util.*;
 
-public class ObjectFile {
+
+/**
+ *
+ */
+public class AFile {
     private String name;
     private String type;
     private String path;
     private long lastModification;
     private long sizeInBytes;
 
-    public ObjectFile(String name, String type, String path, long lastModification, long sizeInBytes) {
+    public AFile(String name, String type, String path, long lastModification, long sizeInBytes) {
         this.name = name;
         this.type = type;
         this.path = path;
@@ -19,22 +23,45 @@ public class ObjectFile {
         this.sizeInBytes = sizeInBytes;
     }
 
-    public ObjectFile(String name, String type) {
+    public AFile(String name, String type) {
         this.name = name;
         this.type = type;
     }
 
-    public ObjectFile() {
+    public AFile() {
 
     }
 
-    public ObjectFile(String name) {
+
+    public AFile(String name) {
         this.name = name;
+    }
+
+    public static List<File> listFilesForFolder(final File folder, List<File> fileArrayList) {
+        for (final File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory()) {
+                listFilesForFolder(fileEntry, fileArrayList);
+            } else {
+                fileArrayList.add(fileEntry);
+            }
+        }
+        return fileArrayList;
+    }
+
+    public static List<AFile> makeObjectFilesList(File folder) {
+        List<AFile> aFilesList = new ArrayList<AFile>();
+        List<File> fileArrayList = new ArrayList<File>();
+        List<File> createdList = listFilesForFolder(folder, fileArrayList);
+        for (File f : createdList) {
+            AFile aFile = createObject(f);
+            aFilesList.add(aFile);
+        }
+        return aFilesList;
     }
 
     @Override
     public String toString() {
-        return "ObjectFile{" +
+        return "AFile{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", path='" + path + '\'' +
@@ -83,15 +110,15 @@ public class ObjectFile {
         this.sizeInBytes = sizeInBytes;
     }
 
-    public static ObjectFile createObject(File fileEntry) {
+    public static AFile createObject(File fileEntry) {
         String fullName = fileEntry.getName();
         String name = extractName(fullName);
         String type = extractType(fullName);
         String path = fileEntry.getPath();
         long lastModification = fileEntry.lastModified();
         long size = fileEntry.length();
-        ObjectFile objectFile = new ObjectFile(name, type, path, lastModification, size);
-        return objectFile;
+        AFile aFile = new AFile(name, type, path, lastModification, size);
+        return aFile;
     }
 
     public static String extractName(String fullName) {
@@ -121,35 +148,35 @@ public class ObjectFile {
     public boolean equalsName(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ObjectFile that = (ObjectFile) o;
+        AFile that = (AFile) o;
         return Objects.equals(name, that.name);
     }
 
     public boolean equalsModification(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ObjectFile that = (ObjectFile) o;
+        AFile that = (AFile) o;
         return lastModification == that.lastModification;
     }
 
     public boolean equalsSize(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ObjectFile that = (ObjectFile) o;
+        AFile that = (AFile) o;
         return sizeInBytes == that.sizeInBytes;
     }
 
     public boolean equalsPath(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ObjectFile that = (ObjectFile) o;
+        AFile that = (AFile) o;
         return Objects.equals(path, that.path);
     }
 
     public boolean equalsType(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ObjectFile that = (ObjectFile) o;
+        AFile that = (AFile) o;
         return Objects.equals(type, that.type);
     }
 
