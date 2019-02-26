@@ -36,7 +36,7 @@ public class DuplicatesMap {
                 }
         );
         return maps;
-
+//TODO: method for map key scenario one object.getName, scenario two object.getType, scenario three object.get.size
     }
 
     private static boolean checkIfHasTheSame(ObjectFile objectFile1, ObjectFile objectFile2, String info) {
@@ -49,5 +49,8 @@ public class DuplicatesMap {
         }
         return false;
     }
-
+//TODO: communication with user: user can choose folder to search, output listed result of duplicated map,example: keyName1 , keyName2 , KeyName3;
+// TODO:  user can: choose key element of map to list value(output: "exactly the same"* and "potentially the same"**; all objectFile details + link path to open file)
+// TODO: check if in given element of map object is "exactly the same)* (with different path - override equals() in ObjectFile class)
+//TODO: user can subjectively compare output files and decide if or which one delete
 }

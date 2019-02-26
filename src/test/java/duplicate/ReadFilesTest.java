@@ -20,7 +20,7 @@ public class ReadFilesTest {
 
     private String pathDirectoryManyFolders = "src\\test\\resources\\folder_testowy";
     private String pathDirectoryOneFile = "src\\test\\resources\\folder_testowy\\Nowy folder";
-
+//TODO: how to make fake folder with subfolder-s and files to test?
 
     DuplicatesMap scenarioOne = new DuplicatesMap();
     ObjectFile objectFile = new ObjectFile();
