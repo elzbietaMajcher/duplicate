@@ -118,6 +118,22 @@ public class ObjectFile {
         //double [] re = new double[n];
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ObjectFile that = (ObjectFile) o;
+        return lastModification == that.lastModification &&
+                sizeInBytes == that.sizeInBytes &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(type, that.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type, lastModification, sizeInBytes);
+    }
+
     public boolean equalsName(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -125,25 +141,11 @@ public class ObjectFile {
         return Objects.equals(name, that.name);
     }
 
-    public boolean equalsModification(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ObjectFile that = (ObjectFile) o;
-        return lastModification == that.lastModification;
-    }
-
     public boolean equalsSize(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ObjectFile that = (ObjectFile) o;
         return sizeInBytes == that.sizeInBytes;
-    }
-
-    public boolean equalsPath(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ObjectFile that = (ObjectFile) o;
-        return Objects.equals(path, that.path);
     }
 
     public boolean equalsType(Object o) {
