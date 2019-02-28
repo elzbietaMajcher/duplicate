@@ -9,10 +9,20 @@ import java.util.Map;
 public class DuplicatesMap {
 
     private Map<String, List<ObjectFile>> duplicates;
+    private String key;
+    private List<ObjectFile> objectFiles;
+
+    public DuplicatesMap() {
+    }
+
+    public DuplicatesMap(Map<String, List<ObjectFile>> duplicates) {
+        this.duplicates = duplicates;
+    }
 
     public Map<String, List<ObjectFile>> getDuplicates() {
         return duplicates;
     }
+
 
     public List<ObjectFile> doDuplicateList(List<ObjectFile> allFiles, ObjectFile objectFile, String info) {
         List<ObjectFile> result = new ArrayList<>();
@@ -47,18 +57,18 @@ public class DuplicatesMap {
     }
 
     private static boolean checkIfHasTheSame(ObjectFile objectFile1, ObjectFile objectFile2, String info) {
-        if (info == "type") {
+        if (info.equals("type")) {
             return objectFile1.equalsType(objectFile2);
-        } else if (info == "name") {
+        } else if (info.equals("name")) {
             return objectFile1.equalsName(objectFile2);
-        } else if (info == "size") {
+        } else if (info.equals("size")) {
             return objectFile1.equalsSize(objectFile2);
         }
         return false;
     }
-//TODO: communication with user: user can choose folder to search, output listed result of duplicated map,example: keyName1 , keyName2 , KeyName3;
+
 // TODO:  user can: choose key element of map to list value(output: "exactly the same"* and "potentially the same"**; all objectFile details + link path to open file)
 // TODO: check if in given element of map object is "exactly the same)* (with different path
 // //override equals() in ObjectFile class)
-//TODO: user can subjectively compare output files and decide if or which one delete
+// user can subjectively compare output files and decide if or which one delete
 }

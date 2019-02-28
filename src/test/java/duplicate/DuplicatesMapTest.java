@@ -1,5 +1,6 @@
 package duplicate;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,14 +11,19 @@ import static org.junit.Assert.assertEquals;
 
 public class DuplicatesMapTest {
 
-    DuplicatesMap scenarioOne = new DuplicatesMap();
-    ObjectFile objectFile = new ObjectFile();
-    DataFactory dataFactory = new DataFactory();
+    private DuplicatesMap scenarioOne = new DuplicatesMap();
+    private ObjectFile objectFile = new ObjectFile();
+    private DataFactory dataFactory = new DataFactory();
 
     //given
-    List<ObjectFile> allList = dataFactory.createObjects1();
-    List<ObjectFile> allList2 = dataFactory.createObjects2();
+    private List<ObjectFile> allList = new ArrayList<>();
+    private List<ObjectFile> allList2 = new ArrayList<>();
 
+    @Before
+    public void before()throws Exception{
+        allList = dataFactory.createObjects1();
+        allList2 = dataFactory.createObjects2();
+    }
 
     @Test
     public void testDoMapScenarioEmptyArray() {

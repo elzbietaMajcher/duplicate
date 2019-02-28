@@ -22,7 +22,7 @@ public class AllFileListTest {
     private String pathDirectoryOneFile = "src\\test\\resources\\folder_testowy\\Nowy folder";
 //TODO: how to make fake folder with subfolder-s and files to test?
 
-    AllFileList allFileList = new AllFileList();
+    private AllFileList allFileList = new AllFileList();
 
 
     @Test

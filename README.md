@@ -1,8 +1,9 @@
 # findDuplicateFiles
 
 user can:
-- given: path of a folder and matching strategy
-the program will search if any file inside given folder has match.
+- given: path of a folder, matching strategy, path to save output.
+
+The program will search if any file inside given folder has a match + saving output to .txt
 
 3 matching strategy:
 1. same name without extension - return map of duplicated files for which the same name file is find more than one time,
@@ -16,9 +17,11 @@ Example:
 2. search strategy: same name
 3. output: 
 a) picture[picture.jpg, picture.gif]; b) document [document.doc, document.txt, document.xls];
+b) save to newFile.txt
 
 Example:
 1. c:/
 2. search strategy: same extension
 3. output: 
-1) doc[picture.doc, something.doc]
+a) doc[picture.doc, something.doc]
+b) save to newOtherFile.txt
